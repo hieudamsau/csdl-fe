@@ -30,7 +30,7 @@ import List from "./page/adminpage/product/List";
 import AddNew from "./page/adminpage/product/add/AddNew";
 
 function App() {
-  const isAuthenticated = checkAuth()
+  const isAuthenticated = checkAuth();
   return (
     <>
       <PayPalScriptProvider
@@ -67,7 +67,7 @@ function App() {
               element={<UpdatePassword />}
             ></Route>
           </Route>
-          <Route element={<ProductDetail />} path="/:slug/:id"></Route>
+          <Route element={<ProductDetail />} path="/product-detail/:id"></Route>
           <Route path="/cart" element={<CartPage />}></Route>
           <Route path="/checkout" element={<PaymentPage />}></Route>
           <Route path="/product" element={<ProductFilterPage />}></Route>
@@ -76,16 +76,21 @@ function App() {
           <Route path="/*" element={<NotFoundPage />}></Route>
 
           <Route exact path="/admin" element={<PrivateRoute />}>
-                  <Route path="product">
-                     <Route index element={<List />}></Route>
-                     <Route path="add-new-product" element={<AddNew />} />
-                     <Route path="edit-new-product/:id" element={<AddNew />} />
-                  </Route>
-                  <Route path="category" element={<List />} />
-                  <Route path="service" element={<List />} />
-                  <Route path="application" element={<List />} />
-               </Route>
-               <Route path="/sign-in" element={isAuthenticated ? <Navigate to={'/admin'} /> : <SignInPage />} />
+            <Route path="product">
+              <Route index element={<List />}></Route>
+              <Route path="add-new-product" element={<AddNew />} />
+              <Route path="edit-new-product/:id" element={<AddNew />} />
+            </Route>
+            <Route path="category" element={<List />} />
+            <Route path="service" element={<List />} />
+            <Route path="application" element={<List />} />
+          </Route>
+          <Route
+            path="/sign-in"
+            element={
+              isAuthenticated ? <Navigate to={"/admin"} /> : <SignInPage />
+            }
+          />
         </Routes>
         <Footer />
       </PayPalScriptProvider>
@@ -94,11 +99,11 @@ function App() {
 }
 
 export default App;
-function checkAuth (){
-  const user = JSON.parse(localStorage.getItem('user'))
+function checkAuth() {
+  const user = JSON.parse(localStorage.getItem("user"));
   if (user?.email === undefined) {
-     return false
+    return false;
   } else {
-     return true
+    return true;
   }
 }

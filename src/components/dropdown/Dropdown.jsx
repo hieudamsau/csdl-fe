@@ -66,7 +66,7 @@ const Dropdown = () => {
       if (result.isConfirmed) {
         const action = logout();
         dispatch(action);
-        await userApi.logout();
+        await localStorage.removeItem("user");
         navigate("/");
         Swal.fire("Tạm biệt! Hẹn gặp lại quý khách");
       }

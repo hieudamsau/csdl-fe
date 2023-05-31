@@ -31,9 +31,15 @@ const Navbar = () => {
       isLocked = false;
     }
   };
-
-  const isLoggedIn = true
-    // loggedInUser === null ? null : loggedInUser.active === "active";
+  const [localSet, setLocalSet] = useState();
+  console.log(localSet);
+  useEffect(() => {
+    const userLocal = JSON.parse(localStorage.getItem("user"));
+    setLocalSet(userLocal);
+  }, []);
+  const isLoggedIn = localSet === null ? true : false;
+  console.log("isLoggedIn", isLoggedIn);
+  // loggedInUser === null ? null : loggedInUser.active === "active";
 
   const handleLogout = () => {
     Swal.fire({
@@ -175,7 +181,7 @@ const Navbar = () => {
           )}
         </div>
 
-        {!isLoggedIn ? (
+        {isLoggedIn == true ? (
           <Link
             to="/sign-in"
             className="flex items-center justify-center hover:text-yellow-400"

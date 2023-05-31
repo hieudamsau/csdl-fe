@@ -26,10 +26,6 @@ const userApi = {
     const url = "/users/changeState";
     return axiosClient.patch(url, data);
   },
-  logout() {
-    const url = "/users/logout";
-    return axiosClient.get(url);
-  },
   verifyResetPassword(data) {
     const url = "/users/verifyResetPass";
     return axiosClient.post(url, data);

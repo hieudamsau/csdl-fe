@@ -37,20 +37,20 @@ const HomePage = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    function fetchDataProduct(page) {
+    function fetchDataProduct() {
       const limit = 10;
       const data = {
         page: page,
         limit: limit,
       };
       try {
-        dispatch(getProduct(data));
+        dispatch(getProduct());
       } catch (error) {
         console.log(error.message);
       }
     }
-    fetchDataProduct(page);
-  }, [page]);
+    fetchDataProduct();
+  }, []);
 
   const handlePageClick = (values) => {
     setPage(values);

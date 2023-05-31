@@ -1,5 +1,6 @@
 import React from "react";
 import { formatPrice } from "../../utils/formatPrice";
+import { UrlImage } from "../../assets/configImage";
 const ProductItem = ({
   product,
   onClickItem,
@@ -25,7 +26,7 @@ const ProductItem = ({
     >
       <img
         src={
-          product?.images[0] ||
+          UrlImage(product?.image_url[0]?.url) ||
           "https://lh3.googleusercontent.com/ZQFbZeosDa1ODQnaaunB72fejXPcl_hg7rfEcgVlZSkgtOTAHQH1M4RxVrH2cLN6gjqJvOAq1b8CeE92gjqDN2W3b2HsMkxb=rw"
         }
         alt=""
@@ -33,7 +34,7 @@ const ProductItem = ({
       />
       <div className="flex flex-col flex-1">
         <h3 className="line-clamp-2 mb-2 text-sm font-medium">
-          {product?.title}
+          {product?.name}
         </h3>
         {product?.inventory < 5 && product?.inventory > 0 && (
           <span className="text-orange-500 font-medium mb-2 text-sm">
@@ -48,7 +49,7 @@ const ProductItem = ({
         {product?.inventory > 4 && <span className="mb-8"></span>}
         <div className="flex items-center justify-between text-sm  mb-2">
           <span className="text-lg text-blue-700 font-semibold">
-            {formatPrice(product?.promotion)}
+            {formatPrice(product?.price)}
           </span>
           <span>
             <svg

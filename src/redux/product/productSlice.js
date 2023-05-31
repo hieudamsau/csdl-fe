@@ -20,14 +20,11 @@ const initialState = {
   brand: {},
 };
 
-export const getProduct = createAsyncThunk(
-  "user/getProduct",
-  async (payload) => {
-    let query = `page=${payload.page}&limit=${payload.limit}`;
-    const response = await productApi.getAllProduct(query);
-    return response.data;
-  }
-);
+export const getProduct = createAsyncThunk("user/getProduct", async () => {
+  // let query = `page=${payload.page}&limit=${payload.limit}`;
+  const response = await productApi.getAllProduct();
+  return response.data;
+});
 
 export const getProductSearch = createAsyncThunk(
   "user/getProduct/Search",
@@ -65,7 +62,8 @@ export const getProductId = createAsyncThunk(
   "user/getProductId",
   async (payload) => {
     const response = await productApi.getProductId(payload);
-    return response.data;
+    console.log("response", response);
+    return response;
   }
 );
 

@@ -12,7 +12,7 @@ const CartItem = ({ product }) => {
   return (
     <div className="flex items-center gap-x-3 mb-5">
       <img
-        src={product.product.images[0]}
+        src={product?.image_url?.url == ""}
         alt=""
         className="w-[80px] h-[80px] border-2 border-solid cursor-pointer"
         onClick={handleClick}

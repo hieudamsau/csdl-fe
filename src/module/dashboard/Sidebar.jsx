@@ -136,7 +136,7 @@ const Sidebar = () => {
       <div className="flex items-center justify-start">
         <div className="w-[100px]">
           <img
-            srcSet="/images/logo.png"
+            srcSet="/images/logo-act.png"
             alt=""
             className="w-full object-cover"
           />

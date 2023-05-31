@@ -47,8 +47,8 @@ const ProductListHome = ({ data, bg = "", className = "" }) => {
   }, [showModal]);
 
   const handleClick = (item) => {
-    const path = slugify(item.title, { strict: true });
-    navigate(`/${path}/${item._id}`);
+    // const path = slugify(item.title, { strict: true });
+    navigate(`/product-detail/${item.id}`);
   };
   return (
     <div className={`${className}`}>

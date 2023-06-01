@@ -18,8 +18,6 @@ import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { async } from "@firebase/util";
 
-
-
 const SignInPage = () => {
   const {
     handleSubmit,
@@ -47,17 +45,21 @@ const SignInPage = () => {
   }, []);
 
   const handleSignIn = async (values) => {
-    console.log(values);
- 
-dispatch(login(values));
+    dispatch(login(values)).then(() => {
       toast.dismiss();
       toast.success("Chào mừng bạn đến với ACT.VN", { pauseOnHover: false });
+      const checkrole = JSON.parse(localStorage.getItem("user"));
+      if (checkrole.role === 1) {
+        // window.location.reload();
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
       reset({
         email: "",
         password: "",
       });
-      navigate("/admin");
-
+    });
   };
 
   const provider = new GoogleAuthProvider();
@@ -148,7 +150,7 @@ dispatch(login(values));
             maxWidth: 250,
             margin: "30px auto",
             height: "50px",
-            backgroundColor:"#ff7023"
+            backgroundColor: "#ff7023",
           }}
         >
           Đăng nhập

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { addToCart } from "../../../redux/cart/cartSlice";
 import { formatPrice } from "../../../utils/formatPrice";
 const SubInformationProduct = ({ data }) => {
+  console.log("data to cart", data.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleAddCart = () => {
@@ -49,13 +50,13 @@ const SubInformationProduct = ({ data }) => {
         </span>
       )}
       <span className="text-2xl font-semibold text-blue-700 mb-2">
-        {formatPrice(data?.promotion)}
+        {formatPrice(data?.price)}
       </span>
       <div className="flex items-center mb-6">
         <span className="text-lg line-through text-slate-400 ">
-          {formatPrice(data?.price)}
+          {formatPrice(data?.original_price)}
         </span>
-        <span className="text-blue text-lg"> - {data?.percent}%</span>
+        {/* <span className="text-blue text-lg"> - {data?.percent}%</span> */}
       </div>
       <span className="w-full border-dotted border-2 mb-6"></span>
       {/* {data?.inventory > 0 && ( */}

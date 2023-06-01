@@ -10,12 +10,7 @@ import { UrlImage } from "../../../assets/configImage";
 
 const InformationProduct = ({ data }) => {
   const [activeThumb, setActiveThumb] = useState();
-  console.log(data);
-  let base = import.meta.env.URL_IMAGE;
-  // import.meta.env.VITE_API_BASE_URL
-  // const base = "http://192.168.0.202:3012";
 
-  console.log("base", base);
   return (
     <div className="Information-product bg-white rounded-xl py-8 px-2">
       <div className="product-image">

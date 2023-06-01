@@ -69,6 +69,7 @@ const Dropdown = () => {
         await localStorage.removeItem("user");
         navigate("/");
         Swal.fire("Tạm biệt! Hẹn gặp lại quý khách");
+        window.location.reload();
       }
     });
   };

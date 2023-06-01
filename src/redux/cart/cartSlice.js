@@ -9,7 +9,7 @@ const cartSlice = createSlice({
       state.cart = JSON.parse(localStorage.getItem("cart"));
     },
     addToCart(state, action) {
-      newItems = { id, product, quantity };
+      // newItems = { id, product, quantity };
       let cart = JSON.parse(localStorage.getItem("cart"));
       if (!cart) {
         cart = [];

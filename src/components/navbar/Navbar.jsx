@@ -14,7 +14,8 @@ import useClickOutSide from "../../hooks/useClickOutSide";
 import useDebounce from "../../hooks/useDebounce";
 
 const Navbar = () => {
-  const loggedInUser = useSelector((state) => state.user.current);
+  const { user } = useSelector((state) => state.user);
+  console.log("loggedInUser", user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const bodyStyle = document.body.style;
@@ -32,13 +33,10 @@ const Navbar = () => {
     }
   };
   const [localSet, setLocalSet] = useState();
-  console.log(localSet);
-  useEffect(() => {
-    const userLocal = JSON.parse(localStorage.getItem("user"));
-    setLocalSet(userLocal);
-  }, []);
-  const isLoggedIn = localSet === null ? true : false;
-  console.log("isLoggedIn", isLoggedIn);
+
+  useEffect(() => {}, [JSON.parse(localStorage.getItem("user"))]);
+  const isLoggedIn =
+    JSON.parse(localStorage.getItem("user")) === null ? true : false;
   // loggedInUser === null ? null : loggedInUser.active === "active";
 
   const handleLogout = () => {
@@ -203,7 +201,7 @@ const Navbar = () => {
             <span className="px-2 font-medium text-base">Đăng nhập</span>
           </Link>
         ) : (
-          <Profile data={loggedInUser} />
+          <Profile data={user} />
         )}
         <div
           className="relative flex items-center gap-x-3 cart-home cursor-pointer"

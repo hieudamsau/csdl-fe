@@ -58,8 +58,8 @@ export const verifyResetPassword = createAsyncThunk(
 export const login = createAsyncThunk("users/login", async (payload) => {
   const response = await userApi.login(payload);
   localStorage.setItem("asses_token", response.data.asses_token);
-  localStorage.setItem("user",JSON.stringify(response.data.data_user) );
-  return response.data.user;
+  localStorage.setItem("user", JSON.stringify(response.data.data_user));
+  return response.data.data_user;
 });
 
 export const loginWithGoogle = createAsyncThunk(
@@ -114,7 +114,7 @@ const userSlice = createSlice({
       state.current = action.payload;
     },
     [login.fulfilled]: (state, action) => {
-      state.current = action.payload;
+      state.user = action.payload;
     },
     [loginWithGoogle.fulfilled]: (state, action) => {
       state.current = action.payload;

@@ -3,6 +3,7 @@ import { formatPrice } from "../../utils/formatPrice";
 import { useSelector } from "react-redux";
 
 const PDF = ({ componentRef }) => {
+  console.log("componentRef", componentRef);
   const { cart } = useSelector((state) => state.cart);
   return (
     <div className="hidden">
@@ -16,17 +17,17 @@ const PDF = ({ componentRef }) => {
           BÁO GIÁ SẢN PHẨM
         </span>
         {cart?.length > 0 &&
-          cart.map((item) => (
+          cart?.map((item) => (
             <div
               className="flex items-center justify-between p-5 mb-5"
               key={item.id}
             >
               <div className="flex items-center gap-x-3">
-                <img
+                {/* <img
                   src={item?.product?.images[0]}
                   alt=""
                   className="w-[120px] h-[120px] object-cover border-2"
-                />
+                /> */}
                 <span className="text-lg font-medium line-clamp-2 w-[400px]">
                   {item?.product?.title}
                 </span>

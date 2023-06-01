@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { removeFromCart, setQuantity } from "../../redux/cart/cartSlice";
 import Swal from "sweetalert2";
 const QuantityCard = ({ data }) => {
+  console.log("datacard", data);
   const dispatch = useDispatch();
   const handleDecreaseQuantity = (id, quantity) => {
     const newQty = quantity - 1;

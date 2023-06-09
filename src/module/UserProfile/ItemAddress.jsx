@@ -128,7 +128,7 @@ const ItemAddress = ({ data, data_key }) => {
           const data = {
             id: data_key,
           };
-          dispatch(deleteAddress(data));
+          localStorage.removeItem("adress");
           Swal.fire("Xóa thành công");
         } catch (error) {
           console.log(error.message);
@@ -157,16 +157,9 @@ const ItemAddress = ({ data, data_key }) => {
       console.log(error.message);
     }
   };
-
-  const handleDefault = (data_key) => {
-    const dataKey = {
-      id: data_key,
-    };
-    try {
-      dispatch(setAddressDefault(dataKey));
-    } catch (error) {
-      console.log(error.message);
-    }
+  const [defaultData, setDefaultData] = useState(false);
+  const handleDefault = () => {
+    setDefaultData(true);
   };
 
   return (
@@ -175,7 +168,7 @@ const ItemAddress = ({ data, data_key }) => {
         <div className="flex flex-col justify-between ">
           <div className="flex items-center gap-x-5 mb-2">
             <h3 className="font-medium text-base ">{data.name}</h3>
-            {data.setDefault && (
+            {defaultData && (
               <div className="px-1 py-1 bg-blue-100 rounded-md font-medium text-sm">
                 Mặc định
               </div>
@@ -346,6 +339,7 @@ const ItemAddress = ({ data, data_key }) => {
               <Button
                 type="submit"
                 height="50px"
+                className="p-3 text-base font-medium bg-white text-[#316BFF] rounded-lg border border-solid border-[blue]"
                 isLoding={isSubmitting}
                 disable={isSubmitting}
               >

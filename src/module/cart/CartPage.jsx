@@ -113,9 +113,7 @@ const CartPage = () => {
                             <QuantityCard data={item} />
                           </td>
                           <td className="text-base font-semibold">
-                            {formatPrice(
-                              item.product.promotion * item.quantity
-                            )}
+                            {formatPrice(item.product.price * item.quantity)}
                           </td>
                         </tr>
                       ))}
@@ -132,7 +130,7 @@ const CartPage = () => {
                     {formatPrice(
                       cart?.reduce(
                         (count, item) =>
-                          count + item.quantity * item.product.promotion,
+                          count + item.quantity * item.product.price,
                         0
                       )
                     )}
@@ -146,7 +144,7 @@ const CartPage = () => {
                     {formatPrice(
                       cart?.reduce(
                         (count, item) =>
-                          count + item.quantity * item.product.promotion,
+                          count + item.quantity * item.product.price,
                         0
                       )
                     )}

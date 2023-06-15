@@ -123,6 +123,7 @@ const UserAddress = () => {
   }, [showModal]);
 
   const handleSend = (values) => {
+    console.log("values", values);
     if (!isValid) return null;
     const dataAddress = {
       name: values.fullname,
@@ -132,16 +133,16 @@ const UserAddress = () => {
       district: getValues("dictrict"),
       ward: getValues("ward"),
     };
-
-    try {
-      dispatch(addAddress(dataAddress));
-      toast.dismiss();
-      toast.success("Thêm thành công địa chỉ");
-      setShowModal(false);
-    } catch (error) {
-      toast.dismiss();
-      toast.error(error.message);
-    }
+    localStorage.setItem("adress", JSON.stringify(dataAddress));
+    // try {
+    //   dispatch(addAddress(dataAddress));
+    //   toast.dismiss();
+    //   toast.success("Thêm thành công địa chỉ");
+    //   // setShowModal(false);
+    // } catch (error) {
+    //   toast.dismiss();
+    //   toast.error(error.message);
+    // }
     reset({
       fullname: "",
       sdt: "",

@@ -19,7 +19,7 @@ const PaymentPage = () => {
   const { cart } = useSelector((state) => state.cart);
   const { address } = useSelector((state) => state.address);
   const dispatch = useDispatch();
-  const data = address.filter((item) => item.setDefault === true)[0];
+  const data = JSON.parse(localStorage.getItem("adress"));
   useEffect(() => {
     window.scrollTo({
       top: 0,
@@ -50,7 +50,9 @@ const PaymentPage = () => {
     setPayPal(true);
     setCash(false);
   };
-
+  const totalprice = formatPrice(
+    cart?.reduce((count, item) => count + item.quantity * item.product.price, 0)
+  );
   const handleClick = async () => {
     if (data === undefined) {
       toast.dismiss();
@@ -74,7 +76,7 @@ const PaymentPage = () => {
           receiver: data?.name,
           cart: cart,
           totalPrice: cart?.reduce(
-            (count, item) => count + item.quantity * item.product.promotion,
+            (count, item) => count + item.quantity * item.product.price,
             0
           ),
           payments: paymentMethod,
@@ -82,19 +84,19 @@ const PaymentPage = () => {
         if (paymentMethod === "tiền mặt") {
           try {
             dispatch(resetCart());
-            const response = await orderApi.createOrder(dataAdress);
-            const data1 = {
-              id: response.data.id,
-              total: response.data.totalPrice,
-            };
-            localStorage.setItem("order", JSON.stringify(data1));
+            // const response = await orderApi.createOrder(dataAdress);
+            // const data1 = {
+            //   id: response.data.id,
+            //   total: response.data.totalPrice,
+            // };
+            localStorage.setItem("order", JSON.stringify(dataAdress));
           } catch (error) {
             console.log(error.message);
           }
-          navigate("/payment-cash");
+          navigate("/account/orders");
         } else {
           localStorage.setItem("order", JSON.stringify(dataAdress));
-          navigate("/payment-bank");
+          navigate("/account/orders");
         }
       }
     });
@@ -194,7 +196,7 @@ const PaymentPage = () => {
                     {formatPrice(
                       cart?.reduce(
                         (count, item) =>
-                          count + item.quantity * item.product.promotion,
+                          count + item.quantity * item.product.price,
                         0
                       )
                     )}
@@ -214,7 +216,7 @@ const PaymentPage = () => {
                     {formatPrice(
                       cart?.reduce(
                         (count, item) =>
-                          count + item.quantity * item.product.promotion,
+                          count + item.quantity * item.product.price,
                         0
                       )
                     )}

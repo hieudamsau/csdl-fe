@@ -18,10 +18,11 @@ const UserOrder = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { status, totalPage } = useSelector((state) => state.order);
+  // const { status, totalPage } = useSelector((state) => state.order);
   const { current } = useSelector((state) => state.user);
-  const { order, update } = useSelector((state) => state.order);
-
+  // const { order, update } = useSelector((state) => state.order);
+  const order = JSON.parse(localStorage.getItem("order"));
+  console.log("orrder", order);
   const location = useLocation();
   const params = queryString.parse(location.search);
   const [state, setState] = useState(params.status);
@@ -49,7 +50,7 @@ const UserOrder = () => {
     } catch (error) {
       console.log(error.message);
     }
-  }, [page, state, params.status, update]);
+  }, [page, state]);
 
   const handleClick = (e) => {
     setState(e.target.value);
@@ -60,7 +61,7 @@ const UserOrder = () => {
   const handlePageClick = (values) => {
     setPage(values);
   };
-
+  const orderArr = [order];
   return (
     <div>
       <div className="flex items-center justify-between">
@@ -182,7 +183,7 @@ const UserOrder = () => {
           </Table>
         </>
       )}
-      {status === action_status.SUCCEEDED && (
+      {order && (
         <>
           {order?.length === 0 && (
             <div className="bg-white container rounded-lg h-[400px] flex flex-col items-center justify-center gap-y-3 ">
@@ -196,14 +197,14 @@ const UserOrder = () => {
               </span>
             </div>
           )}
-          {order?.length > 0 && (
+          {order && (
             <>
               {" "}
               <Table>
                 <thead>
                   <tr>
-                    <th>Mã đơn hàng</th>
-                    <th>Ngày mua</th>
+                    {/* <th>Mã đơn hàng</th>
+                    <th>Ngày mua</th> */}
                     <th>Sản phẩm</th>
                     <th>Tổng tiền</th>
                     <th>Trạng thái</th>
@@ -212,10 +213,10 @@ const UserOrder = () => {
                 <tbody>
                   {(state === "All" || state === undefined) && (
                     <>
-                      {order?.length > 0 &&
-                        order.map((item) => (
+                      {order &&
+                        orderArr?.map((item) => (
                           <tr className="text-base" key={item._id}>
-                            <td
+                            {/* <td
                               className="cursor-pointer text-blue-600 hover:text-blue-900"
                               onClick={() =>
                                 navigate(`/account/orders/${item._id}`)
@@ -228,10 +229,10 @@ const UserOrder = () => {
                               {format(new Date(item?.createdAt), "HH:mm")}
                               &nbsp;&nbsp;
                               {format(new Date(item?.createdAt), "dd/MM/yyyy")}
-                            </td>
-                            <td>{item.cart[0].product.title.slice(0, 50)}</td>
+                            </td> */}
+                            <td>{item.cart[0].product.name}</td>
                             <td>{formatPrice(item.totalPrice)}</td>
-                            {item?.status === "Processed" && (
+                            {item && (
                               <td>
                                 <span className="p-2 rounded-lg text-white bg-orange-400">
                                   Đang xử lý
@@ -358,7 +359,7 @@ const UserOrder = () => {
                 </tbody>
               </Table>
               <div className="flex items-center justify-center mt-5">
-                <Pagination
+                {/* <Pagination
                   activePage={page}
                   nextPageText={">"}
                   prevPageText={"<"}
@@ -368,7 +369,7 @@ const UserOrder = () => {
                   lastPageText={">>"}
                   linkClass="page-num"
                   onChange={handlePageClick}
-                />
+                /> */}
               </div>
             </>
           )}

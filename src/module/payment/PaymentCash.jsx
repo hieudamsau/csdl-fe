@@ -46,17 +46,17 @@ const PaymentCash = () => {
           Vui lòng chờ trong giây lát hoặc liên hệ bộ phận quản trị viên
         </span>
         <div className="mt-10 p-5 flex flex-col w-[550px]">
-          <div className="flex items-center text-xl justify-between ">
+          {/* <div className="flex items-center text-xl justify-between ">
             <span>Mã đơn hàng:</span>
             <span>{data?.id}</span>
-          </div>
+          </div> */}
           <div className="flex items-center text-xl justify-between">
             <span>Giá trị đơn hàng:</span>
-            <span>{formatPrice(data?.total)}</span>
+            <span>{data}</span>
           </div>
           <div className="flex items-center text-xl justify-between">
             <span>Còn phải thanh toán:</span>
-            <span>{formatPrice(data?.total)}</span>
+            <span>{data}</span>
           </div>
         </div>
         <button

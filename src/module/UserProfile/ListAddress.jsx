@@ -7,9 +7,10 @@ import LoadingPage from "../../components/loading/LoadingPage";
 import Skeleton from "../../components/skeleton/Skeleton";
 
 const ListAddress = () => {
-  const { status, updateAddress, add, deleteAddress, address } = useSelector(
+  const { status, updateAddress, add, deleteAddress } = useSelector(
     (state) => state.address
   );
+  const address = JSON.parse(localStorage.getItem("adress"));
 
   const dispatch = useDispatch();
 
@@ -66,12 +67,8 @@ const ListAddress = () => {
           </div>
         </>
       )}
-      {status === action_status.SUCCEEDED &&
-        address.length > 0 &&
-        address.map((item, index) => (
-          <ItemAddress data={item} key={index} data_key={index} />
-        ))}
-      {address.length === 0 && (
+      {address && <ItemAddress data={address} />}
+      {!address && (
         <div className="flex flex-col items-center justify-center h-[300px] bg-white">
           <svg
             xmlns="http://www.w3.org/2000/svg"
